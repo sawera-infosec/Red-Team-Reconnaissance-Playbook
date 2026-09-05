@@ -1,6 +1,14 @@
 # Red Team Reconnaissance Playbook for a Fintech App
 ### Individual Contribution — Member 4
 
+## ⚠️ Disclaimer
+This is an **academic/training exercise**, not a real penetration test. All scanning
+and testing shown in this repository was performed **exclusively against an
+authorized, self-hosted lab environment** (OWASP Juice Shop, run locally in an
+isolated VM). **No real, live, or production fintech system was accessed, scanned,
+or tested.** Nothing here should be interpreted as targeting any real company or
+application.
+
 ## Project
 This repository contains my individual contribution to the group project **"Red Team Reconnaissance Playbook for a Fintech App"** — a portfolio-quality reconnaissance exercise modeled on real red-team client work.
 
@@ -29,7 +37,6 @@ Basic HTTP-layer reconnaissance against the Juice Shop target:
 No exploitation was attempted. This was a reconnaissance-only exercise.
 
 ## Findings
-
 | ID | Finding | Severity |
 |----|---------|----------|
 | F-01 | Overly Permissive CORS Policy (`Access-Control-Allow-Origin: *`) | Medium |
@@ -45,6 +52,16 @@ Full details — description, evidence, impact, severity reasoning, and remediat
 - Implement a Content-Security-Policy header for browser-level XSS defense-in-depth.
 - Do not use robots.txt to hide sensitive/internal paths; enforce proper authentication/authorization instead.
 
+## What I Learned
+Working through this exercise helped me understand how much can be inferred
+from basic HTTP-layer recon alone — no exploitation needed. I learned how
+Metasploit's `auxiliary/scanner/http/http_version` module fingerprints a
+target, how to read and interpret raw HTTP response headers with curl, and
+why misconfigurations like a wildcard CORS policy or a missing CSP header
+are still worth flagging even though they aren't directly exploitable on
+their own. I also got hands-on practice setting up an isolated lab (Kali VM
++ Docker + VirtualBox networking) correctly before doing any testing.
+
 ## Evidence
 Screenshots supporting each finding are included in this repository:
 - `_docker_ps.png` — Juice Shop container running and port-mapped
@@ -54,6 +71,8 @@ Screenshots supporting each finding are included in this repository:
 
 ## Authorization & Scope
 All testing was performed exclusively against a self-hosted, local instance of OWASP Juice Shop running in an isolated Kali Linux VM under my own control. **No real, live, third-party, or production systems were accessed, scanned, or tested at any point.**
+
+> ✅ Verified: all testing confined to a local, self-hosted Juice Shop instance — no live, third-party, or production system was scanned or accessed at any point.
 
 ## Files in This Repository
 - `Red_Team_Recon_MiniReport_Member4.pdf` — full professional mini-report
